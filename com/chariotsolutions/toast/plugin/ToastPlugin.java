@@ -1,4 +1,4 @@
-
+package com.chariotsolutions.toast.plugin;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,9 +13,9 @@ import com.phonegap.api.PluginResult.Status;
 public class ToastPlugin extends Plugin {
 
 	private static final String TAG = "ToastPlugin";
-	private static final int TOAST_LENGTH_INDEX = 1;
+	private static final String LONG_TOAST_ACTION = "show_long";
 	private static final int TOAST_MESSAGE_INDEX = 0;
-	
+
 	@Override
 	public PluginResult execute(String action, JSONArray data, String callbackId) {
 		String toastMessage;
@@ -25,20 +25,16 @@ public class ToastPlugin extends Plugin {
 			Log.e(TAG, "Required parameter 'Toast Message' missing");
 			return new PluginResult(Status.ERROR);
 		}
-
-		int toastLength;
-		try {
-			toastLength = data.getInt(TOAST_LENGTH_INDEX);
-		} catch (JSONException e) {
-			Log.e(TAG, "Required parameter 'Toast display length' missing");
-			return new PluginResult(Status.ERROR);
+		
+		if (action.equals(LONG_TOAST_ACTION)) {
+		  ctx.runOnUiThread(new RunnableToast(toastMessage, Toast.LENGTH_LONG));
+		} else {
+		  ctx.runOnUiThread(new RunnableToast(toastMessage, Toast.LENGTH_SHORT));
 		}
-
-		ctx.runOnUiThread(new RunnableToast(toastMessage, toastLength));
 
 		return new PluginResult(Status.OK);
 	}
-	
+
 	class RunnableToast implements Runnable {
 		private String message;
 		private int length;
@@ -47,12 +43,12 @@ public class ToastPlugin extends Plugin {
 			this.message = message;
 			this.length = length;
 		}
-		
+
 		@Override
 		public void run() {
 			Toast.makeText(ctx, message, length).show();
 		}
-		
+
 	}
 
 }

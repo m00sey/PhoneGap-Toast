@@ -1,11 +1,12 @@
 var ToastPlugin = function() {
 };
 
-ToastPlugin.SHORT_LENGTH = 0;
-ToastPlugin.LONG_LENGTH = 1;
+ToastPlugin.prototype.show_long = function(message, win, fail) {
+  PhoneGap.exec(win, fail, "ToastPlugin", "show_long", [message]);
+};
 
-ToastPlugin.prototype.show = function(message, length, win, fail) {
-  PhoneGap.exec(win, fail, "ToastPlugin", "show", [message, length]);
+ToastPlugin.prototype.show_short = function(message, win, fail) {
+  PhoneGap.exec(win, fail, "ToastPlugin", "show_short", [message]);
 };
 
 /**
@@ -19,5 +20,5 @@ PhoneGap.addConstructor(function() {
   PhoneGap.addPlugin('ToastPlugin', new ToastPlugin());
 
   // Register the native class of plugin with PhoneGap
-  navigator.app.addService("ToastPlugin", "ToastPlugin"); 
+  navigator.app.addService("ToastPlugin", "com.chariotsolutions.toast.plugin.ToastPlugin"); 
 });

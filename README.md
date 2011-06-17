@@ -11,12 +11,14 @@ Add the PhoneGap Toast Plugin JS file along side your other assets and import.
 
 Then you can use the plugin like so:
 <pre>
-	window.plugins.ToastPlugin.show('Epic!', ToastPlugin.SHORT_LENGTH, win, fail)
+	window.plugins.ToastPlugin.show_long('Epic!');
 </pre>
 
-### Options:
-* ToastPlugin.SHORT_LENGTH
-* ToastPlugin.LONG_LENGTH
+or
 
-These correspond to the Android options: (http://developer.android.com/reference/android/widget/Toast.html#LENGTH_LONG)
+<pre>
+	window.plugins.ToastPlugin.show_short('Epic!');
+</pre>
+
+The long vs short correspond to the Android options: (http://developer.android.com/reference/android/widget/Toast.html#LENGTH_LONG)
 (http://developer.android.com/reference/android/widget/Toast.html#LENGTH_SHORT)

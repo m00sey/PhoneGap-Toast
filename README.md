@@ -2,7 +2,7 @@
 
 ### Usage:
 
-Add the PhoneGap Toast Plugin JAR to your libs/ directory
+Add the phonegap-nfc.jar to your project in Eclipse. Right click on libs and select Build Path > Configure Build Path. Choose Java Build Path and select the Libraries tab. Click add Jars and select phonegap-nfc.jar. If you are building an Android project from the command line jar files found in libs are automatically compiled in.
 
 Add the PhoneGap Toast Plugin JS file along side your other assets and import.
 <pre>
